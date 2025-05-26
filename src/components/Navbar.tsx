@@ -56,6 +56,11 @@ export function Navbar() {
                 커뮤니티
               </NavItem>
             </NavigationMenuItem>
+            <NavigationMenuItem>
+              <NavItem href="/admin" title="제보 승인">
+                제보 승인
+              </NavItem>
+            </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
 
@@ -89,6 +94,14 @@ export function Navbar() {
                     >
                       <div className="text-sm font-medium leading-none">
                         커뮤니티
+                      </div>
+                    </Link>
+                    <Link
+                      to="/admin"
+                      className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                    >
+                      <div className="text-sm font-medium leading-none">
+                        제보 승인
                       </div>
                     </Link>
                   </div>

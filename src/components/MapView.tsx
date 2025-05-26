@@ -1,16 +1,15 @@
 import React, { useEffect, useRef, memo } from "react";
 
-/**
- * @param {{ onSelectLocation: (coords: { lat: number, lng: number }) => void }} props
- */
+type Props = {
+  onSelectLocation: (coords: { lat: number; lng: number }) => void;
+};
 
-const MapView = memo(({ onSelectLocation }) => {
-  const mapRef = useRef(null);
-  const boxRef = useRef(null);
-  const markerRef = useRef(null);
+const MapView: React.FC<Props> = memo(({ onSelectLocation }) => {
+  const mapRef = useRef<kakao.maps.Map | null>(null);
+  const boxRef = useRef<HTMLDivElement | null>(null);
+  const markerRef = useRef<kakao.maps.Marker | null>(null);
 
   useEffect(() => {
-    // 카카오맵 SDK 로드
     if (window.kakao && window.kakao.maps) {
       initMap();
     } else {
@@ -26,67 +25,71 @@ const MapView = memo(({ onSelectLocation }) => {
       document.head.appendChild(script);
     }
 
-    // 지도 초기화 함수
     function initMap() {
-      if (!mapRef.current) {
-        const options = {
-          center: new window.kakao.maps.LatLng(37.5665, 126.978),
-          level: 3,
-        };
-        mapRef.current = new window.kakao.maps.Map(boxRef.current, options);
+      if (!boxRef.current) return;
 
-        // 지도 클릭 이벤트 등록
-        window.kakao.maps.event.addListener(
-          mapRef.current,
-          "click",
-          (mouseEvent) => {
-            const latlng = mouseEvent.latLng;
-            if (markerRef.current) {
-              markerRef.current.setMap(null);
-            }
-            markerRef.current = new window.kakao.maps.Marker({
-              position: latlng,
-              map: mapRef.current,
-            });
-            onSelectLocation({ lat: latlng.getLat(), lng: latlng.getLng() });
+      const options = {
+        center: new window.kakao.maps.LatLng(37.5665, 126.978),
+        level: 3,
+      };
+      const map = new window.kakao.maps.Map(boxRef.current, options);
+      mapRef.current = map;
+
+      window.kakao.maps.event.addListener(
+        map,
+        "click",
+        (mouseEvent: kakao.maps.event.MouseEvent) => {
+          const latlng = mouseEvent.latLng;
+
+          if (markerRef.current) {
+            markerRef.current.setMap(null);
           }
-        );
-      }
+
+          const marker = new window.kakao.maps.Marker({
+            position: latlng,
+            map,
+          });
+
+          markerRef.current = marker;
+          onSelectLocation({ lat: latlng.getLat(), lng: latlng.getLng() });
+        }
+      );
     }
 
-    // Cleanup: 스크립트 태그 제거 선택사항 (필요 시)
     return () => {
-      // document.querySelectorAll('script[src*="dapi.kakao.com"]').forEach(s => s.remove());
+      // 클린업 생략
     };
   }, [onSelectLocation]);
 
-  // 내 위치 버튼 클릭 핸들러
   const handleMyLocationClick = () => {
     if (!navigator.geolocation) {
       alert("브라우저가 위치 정보를 지원하지 않습니다.");
       return;
     }
+
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const { latitude: lat, longitude: lng } = position.coords;
         const locPosition = new window.kakao.maps.LatLng(lat, lng);
 
-        // 지도 중심 이동
-        mapRef.current.setCenter(locPosition);
+        if (mapRef.current) {
+          mapRef.current.setCenter(locPosition);
+        }
 
-        // 기존 마커 제거 후 새 마커 생성
         if (markerRef.current) {
           markerRef.current.setMap(null);
         }
-        markerRef.current = new window.kakao.maps.Marker({
+
+        const marker = new window.kakao.maps.Marker({
           position: locPosition,
-          map: mapRef.current,
+          map: mapRef.current!,
         });
 
+        markerRef.current = marker;
         onSelectLocation({ lat, lng });
       },
       () => {
-        alert("내 위치 정보를 가져오지 못했습니다.");
+        alert("위치 정보를 가져올 수 없습니다.");
       }
     );
   };

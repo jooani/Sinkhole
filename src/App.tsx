@@ -7,7 +7,10 @@ import SinkholeHeatmap from "./pages/SinkholeHeatmap";
 import NewPostForm from "./pages/NewpostForm";
 import EditPostForm from "./pages/EditpostForm";
 import Community from "./pages/Community";
-import PostDetail from "./pages/PostDetail";
+import PostDetail from "./pages/ReportDetail";
+import AdminApproval from "./pages/AdminApproval";
+import ReportDetail from "./pages/ReportDetail";
+import ReportsPage from "./pages/ReportsPage";
 
 /**
  * 홈 카드 데이터
@@ -36,6 +39,18 @@ const cards = [
     emoji: "💬",
     description: "다른 사람들의 제보와 이야기를 확인해보세요.",
     link: "/community",
+  },
+  {
+    title: "제보 승인",
+    emoji: "🛠️",
+    description: "제보된 내용을 확인하고 승인할 수 있어요.",
+    link: "/admin"
+  },
+  {
+    title: "제보 전체 보기",
+    emoji: "📍",
+    description: "지도와 함께 전체 제보를 한 눈에!",
+    link: "/reports",
   },
 ];
 
@@ -90,6 +105,10 @@ const App: React.FC = () => {
             <Route path="/community/edit/:id" element={<EditPostForm />} />
             <Route path="/community/:id" element={<PostDetail />} />
             <Route path="/community" element={<Community />} />
+            <Route path="/admin" element={<AdminApproval />} />
+            <Route path="/reports/:id" element={<ReportDetail />} />
+            <Route path="/admin" element={<AdminApproval />} />
+            <Route path="/reports" element={<ReportsPage />} />
           </Routes>
         </div>
       </div>
