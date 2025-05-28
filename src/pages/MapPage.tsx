@@ -2,17 +2,7 @@
 import React, { useEffect, useState } from "react";
 import MapView from "../components/MapView";
 import ReportMapMarkers from "../components/ReportMapMarkers";
-
-type Report = {
-  id: number;
-  location: string;
-  description: string;
-  width: number;
-  length: number;
-  depth: number;
-  contact: string;
-  imageUrl?: string;
-};
+import type { Report } from "../types";
 
 export default function MapPage() {
   const [loc, setLoc] = useState<{ lat: number; lng: number } | null>(null);

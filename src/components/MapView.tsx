@@ -38,7 +38,7 @@ const MapView: React.FC<Props> = memo(({ onSelectLocation }) => {
       window.kakao.maps.event.addListener(
         map,
         "click",
-        (mouseEvent: kakao.maps.event.MouseEvent) => {
+        (mouseEvent: any) => {
           const latlng = mouseEvent.latLng;
 
           if (markerRef.current) {

@@ -87,103 +87,105 @@ const SinkholeReport = () => {
   };
 
   return (
-    <PageContainer>
-      <div className="container mx-auto py-8 px-4 max-w-3xl">
-        <h1 className="text-3xl font-bold mb-2">싱크홀 제보</h1>
-        <p className="text-gray-600 mb-6">
-          도로나 보도에서 발견한 싱크홀을 제보해주세요.
-        </p>
+    <div className="bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-100">
+      <PageContainer>
+        <div className="container mx-auto py-8 px-4 max-w-3xl">
+          <h1 className="text-3xl font-bold mb-2">싱크홀 제보</h1>
+          <p className="text-gray-600 mb-6">
+            도로나 보도에서 발견한 싱크홀을 제보해주세요.
+          </p>
 
-        <Separator className="my-6" />
+          <Separator className="my-6" />
 
-        <Card>
-          <CardHeader>
-            <CardTitle>싱크홀 제보 양식</CardTitle>
-            <CardDescription>
-              위치, 크기, 설명을 정확히 입력해주세요.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleSubmit} className="grid gap-6">
-              <div className="grid gap-3">
-                <Label>발견 위치</Label>
-                <MapView onSelectLocation={setSelectedLocation} />
-                {selectedLocation && (
-                  <p className="text-sm text-gray-500 mt-2">
-                    선택된 위치: 위도 {selectedLocation.lat.toFixed(6)}, 경도{" "}
-                    {selectedLocation.lng.toFixed(6)}
-                  </p>
-                )}
-              </div>
+          <Card>
+            <CardHeader>
+              <CardTitle>싱크홀 제보 양식</CardTitle>
+              <CardDescription>
+                위치, 크기, 설명을 정확히 입력해주세요.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handleSubmit} className="grid gap-6">
+                <div className="grid gap-3">
+                  <Label>발견 위치</Label>
+                  <MapView onSelectLocation={setSelectedLocation} />
+                  {selectedLocation && (
+                    <p className="text-sm text-gray-500 mt-2">
+                      선택된 위치: 위도 {selectedLocation.lat.toFixed(6)}, 경도{" "}
+                      {selectedLocation.lng.toFixed(6)}
+                    </p>
+                  )}
+                </div>
 
-              <div className="grid gap-3">
-                <Label>크기 (cm)</Label>
-                <div className="flex gap-4">
-                  <Input
-                    type="number"
-                    placeholder="가로"
-                    className="w-32 bg-white text-black dark:bg-gray-900 dark:text-white"
+                <div className="grid gap-3">
+                  <Label>크기 (cm)</Label>
+                  <div className="flex gap-4">
+                    <Input
+                      type="number"
+                      placeholder="가로"
+                      className="w-32 bg-white text-black dark:bg-gray-900 dark:text-white"
+                      required
+                      value={width}
+                      onChange={(e) => setWidth(e.target.value)}
+                    />
+                    <Input
+                      type="number"
+                      placeholder="세로"
+                      className="w-32 bg-white text-black dark:bg-gray-900 dark:text-white"
+                      required
+                      value={length}
+                      onChange={(e) => setLength(e.target.value)}
+                    />
+                    <Input
+                      type="number"
+                      placeholder="깊이"
+                      className="w-32 bg-white text-black dark:bg-gray-900 dark:text-white"
+                      value={depth}
+                      onChange={(e) => setDepth(e.target.value)}
+                    />
+                  </div>
+                </div>
+
+                <div className="grid gap-3">
+                  <Label>상세 설명</Label>
+                  <Textarea
+                    placeholder="싱크홀 상태 및 주변 상황 설명"
                     required
-                    value={width}
-                    onChange={(e) => setWidth(e.target.value)}
-                  />
-                  <Input
-                    type="number"
-                    placeholder="세로"
-                    className="w-32 bg-white text-black dark:bg-gray-900 dark:text-white"
-                    required
-                    value={length}
-                    onChange={(e) => setLength(e.target.value)}
-                  />
-                  <Input
-                    type="number"
-                    placeholder="깊이"
-                    className="w-32 bg-white text-black dark:bg-gray-900 dark:text-white"
-                    value={depth}
-                    onChange={(e) => setDepth(e.target.value)}
+                    className="bg-white text-black dark:bg-gray-900 dark:text-white"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
                   />
                 </div>
-              </div>
 
-              <div className="grid gap-3">
-                <Label>상세 설명</Label>
-                <Textarea
-                  placeholder="싱크홀 상태 및 주변 상황 설명"
-                  required
-                  className="bg-white text-black dark:bg-gray-900 dark:text-white"
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                />
-              </div>
+                <div className="grid gap-3">
+                  <Label>사진 첨부</Label>
+                  <Input
+                    type="file"
+                    accept="image/*"
+                    className="bg-white text-black dark:bg-gray-900 dark:text-white"
+                    onChange={(e) => setPhoto(e.target.files?.[0] || null)}
+                  />
+                </div>
 
-              <div className="grid gap-3">
-                <Label>사진 첨부</Label>
-                <Input
-                  type="file"
-                  accept="image/*"
-                  className="bg-white text-black dark:bg-gray-900 dark:text-white"
-                  onChange={(e) => setPhoto(e.target.files?.[0] || null)}
-                />
-              </div>
+                <div className="grid gap-3">
+                  <Label>연락처</Label>
+                  <Input
+                    placeholder="010-1234-5678"
+                    className="bg-white text-black dark:bg-gray-900 dark:text-white"
+                    value={contact}
+                    onChange={(e) => setContact(e.target.value)}
+                  />
+                </div>
 
-              <div className="grid gap-3">
-                <Label>연락처</Label>
-                <Input
-                  placeholder="010-1234-5678"
-                  className="bg-white text-black dark:bg-gray-900 dark:text-white"
-                  value={contact}
-                  onChange={(e) => setContact(e.target.value)}
-                />
-              </div>
-
-              <Button type="submit" className="w-full">
-                제보하기
-              </Button>
-            </form>
-          </CardContent>
-        </Card>
-      </div>
-    </PageContainer>
+                <Button type="submit" className="w-full">
+                  제보하기
+                </Button>
+              </form>
+            </CardContent>
+          </Card>
+        </div>
+      </PageContainer>
+    </div>
   );
 };
 

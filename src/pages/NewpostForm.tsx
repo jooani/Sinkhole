@@ -5,7 +5,13 @@ import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
 import { Textarea } from "../components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../components/ui/select";
 
 type FormState = {
   title: string;
@@ -58,14 +64,14 @@ const NewPostForm = () => {
         <h2 className="text-2xl font-bold mb-4">게시글 작성</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <Label htmlFor="category">카테고리</Label>
+            <Label className="text-gray-400 dark:text-gray-300">카테고리</Label>
             <Select
               onValueChange={(value) =>
                 setForm((prev) => ({ ...prev, category: value }))
               }
             >
-              <SelectTrigger className="w-full mt-1">
-                <SelectValue placeholder="카테고리 선택" />
+              <SelectTrigger className="w-full mt-1 bg-white text-black dark:bg-gray-800 dark:text-white">
+                <SelectValue placeholder="카테고리를 선택해주세요" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="notice">공지사항</SelectItem>
@@ -75,16 +81,29 @@ const NewPostForm = () => {
             </Select>
           </div>
           <div>
-            <Label htmlFor="title">제목</Label>
-            <Input name="title" value={form.title} onChange={handleChange} />
+            <Label className="text-gray-400 dark:text-gray-300" htmlFor="title">
+              제목
+            </Label>
+            <Input
+              name="title"
+              value={form.title}
+              onChange={handleChange}
+              className="bg-white text-black dark:bg-gray-800 dark:text-white"
+            />
           </div>
           <div>
-            <Label htmlFor="content">내용</Label>
+            <Label
+              className="text-gray-400 dark:text-gray-300"
+              htmlFor="content"
+            >
+              내용
+            </Label>
             <Textarea
               name="content"
               value={form.content}
               onChange={handleChange}
               rows={6}
+              className="bg-white text-black dark:bg-gray-800 dark:text-white"
             />
           </div>
           <Button type="submit">등록하기</Button>

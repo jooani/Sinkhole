@@ -7,7 +7,7 @@ import SinkholeHeatmap from "./pages/SinkholeHeatmap";
 import NewPostForm from "./pages/NewpostForm";
 import EditPostForm from "./pages/EditpostForm";
 import Community from "./pages/Community";
-import PostDetail from "./pages/ReportDetail";
+import PostDetail from "./pages/PostDetail"; // ❗ 오타 수정
 import AdminApproval from "./pages/AdminApproval";
 import ReportDetail from "./pages/ReportDetail";
 import ReportsPage from "./pages/ReportsPage";
@@ -15,9 +15,7 @@ import LoginForm from "./pages/LoginForm";
 import SignupForm from "./pages/SignupForm";
 import { Navbar } from "./components/Navbar";
 
-/**
- * 홈 카드 데이터
- */
+// 홈 카드 데이터
 const cards = [
   {
     title: "제보하기",
@@ -57,25 +55,20 @@ const cards = [
   },
 ];
 
-/**
- * 홈 컴포넌트
- */
+// 홈 컴포넌트
 const Home: React.FC = () => {
   return (
-    <main className="max-w-5xl mx-auto p-8">
-      <h1 className="text-3xl font-bold text-center mb-10">
-        📍 싱크홀 제보 플랫폼
-      </h1>
+    <main className="max-w-5xl mx-auto p-8 text-gray-800 dark:text-gray-100">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {cards.map((card) => (
           <Link
             to={card.link}
             key={card.title}
-            className="bg-white shadow-md hover:shadow-lg transition rounded-xl p-6 text-center block"
+            className="bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition rounded-xl p-6 text-center block text-gray-800 dark:text-gray-100"
           >
             <div className="text-4xl mb-3">{card.emoji}</div>
             <h2 className="text-xl font-semibold mb-2">{card.title}</h2>
-            <p className="text-gray-600 text-sm">{card.description}</p>
+            <p className="text-gray-600 dark:text-gray-300 text-sm">{card.description}</p>
           </Link>
         ))}
       </div>
@@ -83,17 +76,13 @@ const Home: React.FC = () => {
   );
 };
 
-/**
- * 전체 앱 구성
- */
+// 전체 앱 구성
 const App: React.FC = () => {
-  console.log("✅ App.tsx 렌더됨");
-
   return (
     <BrowserRouter>
-      <div style={{ height: "100vh", display: "flex", flexDirection: "column" }}>
-        <Navbar /> {/* ✅ 여기에 추가 */}
-        <div style={{ flex: 1, overflow: "auto" }}>
+      <div className="bg-white dark:bg-gray-900 min-h-screen text-gray-800 dark:text-gray-100 flex flex-col">
+        <Navbar />
+        <div className="flex-1 overflow-auto">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/report" element={<SinkholeReport />} />
@@ -104,7 +93,6 @@ const App: React.FC = () => {
             <Route path="/community" element={<Community />} />
             <Route path="/admin" element={<AdminApproval />} />
             <Route path="/reports/:id" element={<ReportDetail />} />
-            <Route path="/admin" element={<AdminApproval />} />
             <Route path="/reports" element={<ReportsPage />} />
             <Route path="/login" element={<LoginForm />} />
             <Route path="/signup" element={<SignupForm />} />
