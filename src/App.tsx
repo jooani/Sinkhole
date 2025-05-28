@@ -11,6 +11,9 @@ import PostDetail from "./pages/ReportDetail";
 import AdminApproval from "./pages/AdminApproval";
 import ReportDetail from "./pages/ReportDetail";
 import ReportsPage from "./pages/ReportsPage";
+import LoginForm from "./pages/LoginForm";
+import SignupForm from "./pages/SignupForm";
+import { Navbar } from "./components/Navbar";
 
 /**
  * 홈 카드 데이터
@@ -44,7 +47,7 @@ const cards = [
     title: "제보 승인",
     emoji: "🛠️",
     description: "제보된 내용을 확인하고 승인할 수 있어요.",
-    link: "/admin"
+    link: "/admin",
   },
   {
     title: "제보 전체 보기",
@@ -88,14 +91,8 @@ const App: React.FC = () => {
 
   return (
     <BrowserRouter>
-      <div
-        style={{
-          height: "100vh",
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-
+      <div style={{ height: "100vh", display: "flex", flexDirection: "column" }}>
+        <Navbar /> {/* ✅ 여기에 추가 */}
         <div style={{ flex: 1, overflow: "auto" }}>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -109,6 +106,8 @@ const App: React.FC = () => {
             <Route path="/reports/:id" element={<ReportDetail />} />
             <Route path="/admin" element={<AdminApproval />} />
             <Route path="/reports" element={<ReportsPage />} />
+            <Route path="/login" element={<LoginForm />} />
+            <Route path="/signup" element={<SignupForm />} />
           </Routes>
         </div>
       </div>

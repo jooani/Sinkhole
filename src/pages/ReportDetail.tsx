@@ -20,17 +20,24 @@ export default function ReportDetail() {
   const [report, setReport] = useState<Report | null>(null);
 
   useEffect(() => {
-    if (id) {
-      fetch(`http://localhost:8080/api/reports/${id}`)
-        .then((res) => res.json())
-        .then((data) => setReport(data))
-        .catch((err) => {
-          console.error("제보 조회 실패:", err);
-        });
-    }
+    fetch(`http://localhost:8080/api/reports/${id}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token") || ""}`,
+      },
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("제보 조회 실패");
+        return res.json();
+      })
+      .then((data) => setReport(data))
+      .catch((err) => {
+        console.error(err);
+        alert("제보를 불러오지 못했습니다.");
+      });
   }, [id]);
 
-  if (!report) return <div className="text-center py-10">제보를 불러오는 중...</div>;
+  if (!report)
+    return <div className="text-center py-10">제보를 불러오는 중...</div>;
 
   return (
     <PageContainer>

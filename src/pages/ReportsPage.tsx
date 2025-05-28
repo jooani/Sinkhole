@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ReportMapMarkers from "../components/ReportMapMarkers";
 import { Report } from "../types";
+import BackButton from "../components/BackButton";
 
 export default function ReportsPage() {
   const [reports, setReports] = useState<Report[]>([]);
