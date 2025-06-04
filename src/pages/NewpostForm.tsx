@@ -4,13 +4,6 @@ import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
 import { Textarea } from "../components/ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../components/ui/select";
 
 type FormState = {
   title: string;
@@ -66,7 +59,7 @@ const NewPostForm = () => {
         <h2 className="text-2xl font-bold mb-4">게시글 작성</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <Label className="dark:text-gray-300" htmlFor="title">
+            <Label className="text-white" htmlFor="title">
               제목
             </Label>
             <Input
@@ -77,8 +70,8 @@ const NewPostForm = () => {
             />
           </div>
           <div>
-            <Label className="dark:text-gray-300" htmlFor="content">
-              내용
+            <Label className="text-white" htmlFor="content">
+              제목
             </Label>
             <Textarea
               name="content"
