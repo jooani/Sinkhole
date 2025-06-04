@@ -22,9 +22,12 @@ const AdminApproval = () => {
       }
 
       try {
-        const res = await fetch("https://internetprogramming.onrender.com/api/user/profile", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const res = await fetch(
+          "https://internetprogramming.onrender.com/api/user/profile",
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
 
         if (!res.ok) throw new Error("인증 실패");
 
@@ -35,11 +38,14 @@ const AdminApproval = () => {
           navigate("/");
         } else {
           // ADMIN이라면 승인 대기 제보 불러오기
-          const reportRes = await fetch("https://internetprogramming.onrender.com/api/reports/pending", {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
+          const reportRes = await fetch(
+            "https://internetprogramming.onrender.com/api/reports/pending",
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
 
           if (!reportRes.ok) throw new Error("제보 불러오기 실패");
 
@@ -58,13 +64,28 @@ const AdminApproval = () => {
 
   const handleApprove = async (id: number) => {
     const token = localStorage.getItem("token");
-    await fetch(`https://internetprogramming.onrender.com/api/reports/${id}/approve`, {
-      method: "PATCH",
+    await fetch(
+      `https://internetprogramming.onrender.com/api/reports/${id}/approve`,
+      {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    setReports((prev) => prev.filter((r) => r.id !== id));
+  };
+
+  const handleDelete = async (id: number) => {
+    const token = localStorage.getItem("token");
+    await fetch(`https://internetprogramming.onrender.com/api/reports/${id}`, {
+      method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-
+  
     setReports((prev) => prev.filter((r) => r.id !== id));
   };
 
@@ -111,6 +132,12 @@ const AdminApproval = () => {
                 className="mt-2 bg-green-600 text-white px-4 py-1 rounded hover:bg-green-500"
               >
                 ✅ 승인하기
+              </button>
+              <button
+                onClick={() => handleDelete(report.id)}
+                className="mt-2 bg-red-600 text-white px-4 py-1 rounded hover:bg-red-500"
+              >
+                ❌ 삭제하기
               </button>
             </li>
           ))}
