@@ -52,6 +52,26 @@ export function Navbar() {
     navigate("/login");
   };
 
+  const [userRole, setUserRole] = useState<string | null>(null);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      setIsLoggedIn(true);
+
+      try {
+        const base64Payload = token.split(".")[1];
+        const payload = JSON.parse(atob(base64Payload));
+        setUserRole(payload.role);
+      } catch (e) {
+        console.error("JWT 디코딩 실패:", e);
+      }
+    } else {
+      setIsLoggedIn(false);
+      setUserRole(null);
+    }
+  }, [location]);
+
   return (
     <div className="border-b bg-gray-900 text-white dark:bg-gray-900 dark:text-white">
       <div className="flex h-16 items-center px-4 container mx-auto justify-between">
@@ -70,21 +90,17 @@ export function Navbar() {
             <NavigationMenuItem>
               <NavItem href="/community">커뮤니티</NavItem>
             </NavigationMenuItem>
-            <NavigationMenuItem>
-              <NavItem href="/admin">제보 승인</NavItem>
-            </NavigationMenuItem>
+            {userRole === "ADMIN" && (
+              <NavigationMenuItem>
+                <NavItem href="/admin">제보 승인</NavItem>
+              </NavigationMenuItem>
+            )}
 
             {isLoggedIn ? (
               <NavigationMenuItem>
-                <button
-                  onClick={handleLogout}
-                  className={cn(
-                    navigationMenuTriggerStyle(),
-                    "font-medium text-white"
-                  )}
-                >
+                <NavItem href="#" onClick={handleLogout}>
                   로그아웃
-                </button>
+                </NavItem>
               </NavigationMenuItem>
             ) : (
               <>
@@ -123,7 +139,7 @@ export function Navbar() {
                     {isLoggedIn ? (
                       <button
                         onClick={handleLogout}
-                        className="bg-gray-800 text-white shadow-lg rounded-m block p-2 text-left w-full hover:underline"
+                        className="block p-2 text-left w-full hover:underline"
                       >
                         로그아웃
                       </button>
