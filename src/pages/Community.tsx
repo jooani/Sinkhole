@@ -59,8 +59,8 @@ export default function Community() {
           <thead className="bg-gray-100">
             <tr>
               <th className="p-3 text-black">제목</th>
-              <th className="p-3 hidden sm:table-cell">작성자</th>
-              <th className="p-3 hidden sm:table-cell">작성일</th>
+              <th className="p-3 text-black">작성자</th>
+              <th className="p-3 text-black">작성일</th>
             </tr>
           </thead>
           <tbody>

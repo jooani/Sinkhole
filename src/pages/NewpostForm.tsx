@@ -36,14 +36,17 @@ const NewPostForm = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch("https://internetprogramming.onrender.com/api/community/posts", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token") || ""}`,
-        },
-        body: JSON.stringify(form),
-      });
+      const res = await fetch(
+        "https://internetprogramming.onrender.com/api/community/posts",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token") || ""}`,
+          },
+          body: JSON.stringify(form),
+        }
+      );
 
       if (res.ok) {
         alert("게시글이 등록되었습니다!");
@@ -63,23 +66,7 @@ const NewPostForm = () => {
         <h2 className="text-2xl font-bold mb-4">게시글 작성</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <Select
-              onValueChange={(value) =>
-                setForm((prev) => ({ ...prev, category: value }))
-              }
-            >
-              <SelectTrigger className="w-full mt-1 bg-white text-black dark:bg-gray-800 dark:text-white">
-                <SelectValue placeholder="카테고리를 선택해주세요" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="notice">공지사항</SelectItem>
-                <SelectItem value="info">정보공유</SelectItem>
-                <SelectItem value="experience">경험담</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-          <div>
-            <Label className="text-gray-400 dark:text-gray-300" htmlFor="title">
+            <Label className="dark:text-gray-300" htmlFor="title">
               제목
             </Label>
             <Input
@@ -90,10 +77,7 @@ const NewPostForm = () => {
             />
           </div>
           <div>
-            <Label
-              className="text-gray-400 dark:text-gray-300"
-              htmlFor="content"
-            >
+            <Label className="dark:text-gray-300" htmlFor="content">
               내용
             </Label>
             <Textarea
