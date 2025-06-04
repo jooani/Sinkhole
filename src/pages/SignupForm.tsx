@@ -38,7 +38,7 @@ const SignupForm = () => {
       }
 
       // 2. 자동 로그인 요청
-      const loginRes = await fetch("https://internetprogramming.onrender.com/api/auth/loㅌ₩1gin", {
+      const loginRes = await fetch("https://internetprogramming.onrender.com/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username: form.username, password: form.password }),

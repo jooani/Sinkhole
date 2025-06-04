@@ -58,7 +58,7 @@ const AdminApproval = () => {
 
   const handleApprove = async (id: number) => {
     const token = localStorage.getItem("token");
-    await fetch(`http://localhost:8080/api/reports/${id}/approve`, {
+    await fetch(`https://internetprogramming.onrender.com/api/reports/${id}/approve`, {
       method: "PATCH",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -94,10 +94,9 @@ const AdminApproval = () => {
               {report.imageUrl && (
                 <>
                   <img
-                    src={`http://localhost:8080${report.imageUrl}`}
+                    src={`https://internetprogramming.onrender.com${report.imageUrl}`}
                     alt="제보 이미지"
                     className="max-w-xs mt-2"
-                    crossOrigin="anonymous"
                   />
                   {exifWarnings[report.id] && (
                     <p className="text-sm text-red-600">
@@ -134,7 +133,7 @@ function checkExifMetadata(
 
     const img = new Image();
     img.crossOrigin = "anonymous";
-    img.src = `http://localhost:8080${imageUrl}`;
+    img.src = `https://internetprogramming.onrender.com${imageUrl}`;
 
     img.onload = () => {
       try {
