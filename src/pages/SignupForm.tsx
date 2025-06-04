@@ -41,7 +41,7 @@ const SignupForm = () => {
       const loginRes = await fetch("https://internetprogramming.onrender.com/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username: form.username, password: form.password }),
+        body: JSON.stringify({ username: form.username, password: form.password, nickname: form.nickname }),
       });
 
       if (!loginRes.ok) {
@@ -77,7 +77,7 @@ const SignupForm = () => {
           <Input type="password" name="password" value={form.password} onChange={handleChange} className="text-black"/>
         </div>
         <div>
-          <Label>비밀번호</Label>
+          <Label>닉네임</Label>
           <Input name="nickname" value={form.nickname} onChange={handleChange} className="text-black"/>
         </div>
         <Button type="submit">회원가입</Button>
