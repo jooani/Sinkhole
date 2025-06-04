@@ -22,7 +22,7 @@ const AdminApproval = () => {
       }
 
       try {
-        const res = await fetch("/api/user/profile", {
+        const res = await fetch("https://internetprogramming.onrender.com/api/user/profile", {
           headers: { Authorization: `Bearer ${token}` },
         });
 
