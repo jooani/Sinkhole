@@ -19,7 +19,7 @@ const SignupForm = () => {
 
     try {
       // 1. 회원가입 요청
-      const signupRes = await fetch("http://localhost:8080/api/auth/signup", {
+      const signupRes = await fetch("https://internetprogramming.onrender.com/api/auth/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
@@ -38,7 +38,7 @@ const SignupForm = () => {
       }
 
       // 2. 자동 로그인 요청
-      const loginRes = await fetch("http://localhost:8080/api/auth/login", {
+      const loginRes = await fetch("https://internetprogramming.onrender.com/api/auth/loㅌ₩1gin", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username: form.username, password: form.password }),
@@ -66,15 +66,15 @@ const SignupForm = () => {
         <h2 className="text-xl font-bold">회원가입</h2>
         <div>
           <Label>아이디</Label>
-          <Input name="username" value={form.username} onChange={handleChange} />
+          <Input name="username" value={form.username} onChange={handleChange} className="text-black"/>
         </div>
         <div>
           <Label>이메일</Label>
-          <Input name="email" value={form.email} onChange={handleChange} />
+          <Input name="email" value={form.email} onChange={handleChange} className="text-black"/>
         </div>
         <div>
           <Label>비밀번호</Label>
-          <Input type="password" name="password" value={form.password} onChange={handleChange} />
+          <Input type="password" name="password" value={form.password} onChange={handleChange} className="text-black"/>
         </div>
         <Button type="submit">회원가입</Button>
       </form>

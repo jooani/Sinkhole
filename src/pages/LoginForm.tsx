@@ -18,7 +18,7 @@ const LoginForm = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:8080/api/auth/login", {
+      const res = await fetch("https://internetprogramming.onrender.com/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
@@ -45,11 +45,11 @@ const LoginForm = () => {
         <h2 className="text-xl font-bold">로그인</h2>
         <div>
           <Label>아이디</Label>
-          <Input name="username" value={form.username} onChange={handleChange} />
+          <Input name="username" value={form.username} onChange={handleChange} className="text-black"/>
         </div>
         <div>
           <Label>비밀번호</Label>
-          <Input type="password" name="password" value={form.password} onChange={handleChange} />
+          <Input type="password" name="password" value={form.password} onChange={handleChange} className="text-black"/>
         </div>
         <Button type="submit">로그인</Button>
       </form>

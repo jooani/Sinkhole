@@ -19,7 +19,7 @@ const EditPostForm = () => {
   });
 
   useEffect(() => {
-    fetch(`http://localhost:8080/api/community/posts/${id}`)
+    fetch(`https://internetprogramming.onrender.com/api/community/posts/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setForm({
@@ -38,7 +38,7 @@ const EditPostForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await fetch(`http://localhost:8080/api/community/posts/${id}`, {
+      const res = await fetch(`https://internetprogramming.onrender.com/api/community/posts/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -65,7 +65,7 @@ const EditPostForm = () => {
     if (!confirmed) return;
 
     try {
-      const res = await fetch(`http://localhost:8080/api/community/posts/${id}`, {
+      const res = await fetch(`https://internetprogramming.onrender.com/api/community/posts/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token") || ""}`,

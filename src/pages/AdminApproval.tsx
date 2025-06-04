@@ -1,7 +1,7 @@
-// src/pages/AdminApproval.tsx
 import React, { useEffect, useState } from "react";
 import EXIF from "exif-js";
-import { Report } from "../types"; // Report 타입이 별도 정의되어 있어야 함
+import { Report } from "../types";
+import { useNavigate } from "react-router-dom";
 
 type ExifWarnings = {
   [key: number]: string;
@@ -10,21 +10,61 @@ type ExifWarnings = {
 const AdminApproval = () => {
   const [reports, setReports] = useState<Report[]>([]);
   const [exifWarnings, setExifWarnings] = useState<ExifWarnings>({});
+  const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/reports/pending")
-      .then((res) => res.json())
-      .then((data) => {
-        setReports(data);
-        console.log("pending reports:", data);
-        checkExifMetadata(data, setExifWarnings);
-      });
-  }, []);
+    const checkAdminAndLoadReports = async () => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        alert("로그인이 필요합니다.");
+        navigate("/");
+        return;
+      }
+
+      try {
+        const res = await fetch("/api/user/profile", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        if (!res.ok) throw new Error("인증 실패");
+
+        const data = await res.json();
+
+        if (data.role !== "ADMIN") {
+          alert("관리자만 접근할 수 있습니다.");
+          navigate("/");
+        } else {
+          // ADMIN이라면 승인 대기 제보 불러오기
+          const reportRes = await fetch("https://internetprogramming.onrender.com/api/reports/pending", {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+
+          if (!reportRes.ok) throw new Error("제보 불러오기 실패");
+
+          const reportData = await reportRes.json();
+          setReports(reportData);
+          checkExifMetadata(reportData, setExifWarnings);
+        }
+      } catch (err) {
+        console.error("오류 발생:", err);
+        navigate("/");
+      }
+    };
+
+    checkAdminAndLoadReports();
+  }, [navigate]);
 
   const handleApprove = async (id: number) => {
+    const token = localStorage.getItem("token");
     await fetch(`http://localhost:8080/api/reports/${id}/approve`, {
       method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     });
+
     setReports((prev) => prev.filter((r) => r.id !== id));
   };
 
@@ -83,9 +123,7 @@ const AdminApproval = () => {
 
 export default AdminApproval;
 
-// -------------------------------
 // ✅ EXIF 분석 함수
-// -------------------------------
 function checkExifMetadata(
   reports: Report[],
   setExifWarnings: React.Dispatch<React.SetStateAction<ExifWarnings>>
@@ -100,7 +138,6 @@ function checkExifMetadata(
 
     img.onload = () => {
       try {
-        // 타입을 무시하고 강제 사용 (exif-js의 타입 정의 문제로 인한 우회)
         EXIF.getData(img as any, function (this: any) {
           const lat = EXIF.getTag(this, "GPSLatitude");
           const lon = EXIF.getTag(this, "GPSLongitude");

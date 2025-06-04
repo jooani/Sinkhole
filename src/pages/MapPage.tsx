@@ -9,7 +9,7 @@ export default function MapPage() {
   const [reports, setReports] = useState<Report[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/reports") // 승인된 제보만 가져오는 API
+    fetch("https://internetprogramming.onrender.com/api/reports") // 승인된 제보만 가져오는 API
       .then((res) => res.json())
       .then((data) => setReports(data))
       .catch((err) => console.error("제보 불러오기 실패", err));

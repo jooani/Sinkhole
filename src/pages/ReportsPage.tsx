@@ -7,7 +7,7 @@ export default function ReportsPage() {
   const [reports, setReports] = useState<Report[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/reports")
+    fetch("https://internetprogramming.onrender.com/api/reports")
       .then((res) => res.json())
       .then((data) => setReports(data))
       .catch((err) => console.error("제보 목록 불러오기 실패", err));
@@ -32,7 +32,7 @@ export default function ReportsPage() {
               <p className="text-sm text-gray-600">📝 설명: {report.description}</p>
               {report.imageUrl && (
                 <img
-                  src={`http://localhost:8080${report.imageUrl}`}
+                  src={`https://internetprogramming.onrender.com${report.imageUrl}`}
                   alt="제보 이미지"
                   className="max-w-full rounded"
                 />

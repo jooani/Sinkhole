@@ -14,6 +14,8 @@ import ReportsPage from "./pages/ReportsPage";
 import LoginForm from "./pages/LoginForm";
 import SignupForm from "./pages/SignupForm";
 import { Navbar } from "./components/Navbar";
+import Home from "./pages/Home"
+
 
 // 홈 카드 데이터
 const cards = [
@@ -55,26 +57,6 @@ const cards = [
   },
 ];
 
-// 홈 컴포넌트
-const Home: React.FC = () => {
-  return (
-    <main className="max-w-5xl mx-auto p-8 text-gray-800 dark:text-gray-100">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {cards.map((card) => (
-          <Link
-            to={card.link}
-            key={card.title}
-            className="bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition rounded-xl p-6 text-center block text-gray-800 dark:text-gray-100"
-          >
-            <div className="text-4xl mb-3">{card.emoji}</div>
-            <h2 className="text-xl font-semibold mb-2">{card.title}</h2>
-            <p className="text-gray-600 dark:text-gray-300 text-sm">{card.description}</p>
-          </Link>
-        ))}
-      </div>
-    </main>
-  );
-};
 
 // 전체 앱 구성
 const App: React.FC = () => {

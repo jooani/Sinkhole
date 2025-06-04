@@ -37,7 +37,7 @@ const NewPostForm = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:8080/api/community/posts", {
+      const res = await fetch("https://internetprogramming.onrender.com/api/community/posts", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

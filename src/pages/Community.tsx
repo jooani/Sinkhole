@@ -25,7 +25,7 @@ export default function Community() {
   useEffect(() => {
     const token = localStorage.getItem("token");
 
-    fetch("http://localhost:8080/api/community/posts", {
+    fetch("https://internetprogramming.onrender.com/api/community/posts", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -53,14 +53,14 @@ export default function Community() {
             value={keyword}
             onChange={(e) => setKeyword(e.target.value)}
             placeholder="검색어를 입력하세요"
-            className="w-full border rounded px-4 py-2"
+            className="w-full border rounded px-4 py-2 text-black"
           />
         </div>
 
         <table className="w-full border rounded-md overflow-hidden text-left">
           <thead className="bg-gray-100">
             <tr>
-              <th className="p-3">제목</th>
+              <th className="p-3 text-black">제목</th>
               <th className="p-3 hidden sm:table-cell">작성자</th>
               <th className="p-3 hidden sm:table-cell">작성일</th>
             </tr>

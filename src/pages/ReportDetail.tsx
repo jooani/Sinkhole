@@ -20,7 +20,7 @@ export default function ReportDetail() {
   const [report, setReport] = useState<Report | null>(null);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/api/reports/${id}`, {
+    fetch(`https://internetprogramming.onrender.com/api/reports/${id}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token") || ""}`,
       },
@@ -53,7 +53,7 @@ export default function ReportDetail() {
 
         {report.imageUrl && (
           <img
-            src={`http://localhost:8080${report.imageUrl}`}
+            src={`https://internetprogramming.onrender.com${report.imageUrl}`}
             alt="제보 이미지"
             className="mt-4 rounded shadow max-w-full"
           />

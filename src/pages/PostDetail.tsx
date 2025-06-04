@@ -22,7 +22,7 @@ export default function PostDetail() {
     const token = localStorage.getItem("token");
     if (token) {
       // ✅ 현재 사용자 이름 가져오기
-      fetch("http://localhost:8080/api/user/profile", {
+      fetch("https://internetprogramming.onrender.com/api/user/profile", {
         headers: { Authorization: `Bearer ${token}` },
       })
         .then((res) => res.json())
@@ -32,7 +32,7 @@ export default function PostDetail() {
   }, []);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/api/community/posts/${id}`, {
+    fetch(`https://internetprogramming.onrender.com/api/community/posts/${id}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token") || ""}`,
       },
@@ -53,7 +53,7 @@ export default function PostDetail() {
     if (!confirm) return;
 
     const token = localStorage.getItem("token");
-    const res = await fetch(`http://localhost:8080/api/community/posts/${id}`, {
+    const res = await fetch(`https://internetprogramming.onrender.com/api/community/posts/${id}`, {
       method: "DELETE",
       headers: { Authorization: `Bearer ${token}` },
     });

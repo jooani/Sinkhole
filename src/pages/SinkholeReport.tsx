@@ -60,7 +60,7 @@ const SinkholeReport = () => {
     if (photo) formData.append("image", photo);
 
     try {
-      const res = await fetch("http://localhost:8080/api/reports", {
+      const res = await fetch("https://internetprogramming.onrender.com/api/reports", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`, // ✅ 토큰
