@@ -26,16 +26,16 @@ const LoginForm = () => {
 
       if (res.ok) {
         const data = await res.json();
-        localStorage.setItem("token", data.token); // JWT 저장
-        alert("✅ 로그인 성공");
+        localStorage.setItem("token", data.token);
+        alert("로그인 성공");
         navigate("/");
       } else {
         const err = await res.json();
-        alert(`❌ 로그인 실패: ${err.message || res.status}`);
+        alert(`로그인 실패: ${err.message || res.status}`);
       }
     } catch (err) {
       console.error(err);
-      alert("❌ 오류 발생");
+      alert("오류 발생");
     }
   };
 

@@ -21,7 +21,6 @@ export default function PostDetail() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      // ✅ 현재 사용자 이름 가져오기
       fetch("https://internetprogramming.onrender.com/api/user/profile", {
         headers: { Authorization: `Bearer ${token}` },
       })
@@ -77,7 +76,6 @@ export default function PostDetail() {
         </div>
         <div className="mt-4 whitespace-pre-line">{post.content}</div>
 
-        {/* ✅ 로그인 사용자 & 작성자 일치 시만 버튼 표시 */}
         {currentUser === post.author && (
           <div className="flex gap-4 mt-6">
             <Link to={`/community/edit/${post.id}`}>

@@ -1,6 +1,7 @@
 
 export type Report = {
     id: number;
+    nickname?: string;
     location: string;
     latitude: number;
     longitude: number;

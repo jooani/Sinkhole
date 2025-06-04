@@ -1,4 +1,3 @@
-// src/pages/EditPostForm.tsx
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { PageContainer } from "../components/PageContainer";
@@ -56,7 +55,7 @@ const EditPostForm = () => {
       }
     } catch (err) {
       console.error(err);
-      alert("❌ 수정 중 오류 발생");
+      alert("수정 중 오류 발생");
     }
   };
 
@@ -73,7 +72,7 @@ const EditPostForm = () => {
       });
 
       if (res.ok) {
-        alert("✅ 게시글이 삭제되었습니다.");
+        alert("게시글이 삭제되었습니다.");
         navigate("/community");
       } else {
         const err = await res.json();
@@ -81,7 +80,7 @@ const EditPostForm = () => {
       }
     } catch (err) {
       console.error(err);
-      alert("❌ 삭제 중 오류 발생");
+      alert("삭제 중 오류 발생");
     }
   };
 

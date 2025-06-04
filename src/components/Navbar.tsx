@@ -11,7 +11,6 @@ import {
 } from "../components/ui/navigation-menu";
 import { cn } from "../lib/utils";
 
-// 공통 NavItem
 const NavItem = React.forwardRef<
   React.ElementRef<typeof NavigationMenuLink>,
   React.ComponentPropsWithoutRef<typeof NavigationMenuLink> & {
@@ -38,7 +37,6 @@ const NavItem = React.forwardRef<
 });
 NavItem.displayName = "NavItem";
 
-// ✅ 메인 Navbar 컴포넌트
 export function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
@@ -101,7 +99,6 @@ export function Navbar() {
           </NavigationMenuList>
         </NavigationMenu>
 
-        {/* 모바일 메뉴 */}
         <div className="md:hidden ml-auto">
           <NavigationMenu>
             <NavigationMenuList>

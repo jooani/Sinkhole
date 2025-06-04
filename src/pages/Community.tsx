@@ -1,4 +1,3 @@
-// src/pages/Community.tsx
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { PageContainer } from "../components/PageContainer";
@@ -46,7 +45,6 @@ export default function Community() {
       <div className="max-w-4xl mx-auto p-6">
         <h1 className="text-3xl font-bold mb-6">📢 커뮤니티</h1>
 
-        {/* ✅ 검색창은 테이블 바깥에 있어야 함 */}
         <div className="mb-4">
           <input
             type="text"

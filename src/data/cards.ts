@@ -28,7 +28,7 @@ export const cards = [
     emoji: "🛠️",
     description: "제보된 내용을 확인하고 승인할 수 있어요.",
     link: "/admin",
-    role: "ADMIN", // ✅ 관리자만 보이게 하기 위한 필드
+    role: "ADMIN",
   },
   {
     title: "제보 전체 보기",

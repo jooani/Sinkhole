@@ -1,4 +1,3 @@
-// App.tsx
 import React from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
@@ -7,7 +6,7 @@ import SinkholeHeatmap from "./pages/SinkholeHeatmap";
 import NewPostForm from "./pages/NewpostForm";
 import EditPostForm from "./pages/EditpostForm";
 import Community from "./pages/Community";
-import PostDetail from "./pages/PostDetail"; // ❗ 오타 수정
+import PostDetail from "./pages/PostDetail";
 import AdminApproval from "./pages/AdminApproval";
 import ReportDetail from "./pages/ReportDetail";
 import ReportsPage from "./pages/ReportsPage";
@@ -17,7 +16,6 @@ import { Navbar } from "./components/Navbar";
 import Home from "./pages/Home"
 
 
-// 홈 카드 데이터
 const cards = [
   {
     title: "제보하기",
@@ -58,7 +56,6 @@ const cards = [
 ];
 
 
-// 전체 앱 구성
 const App: React.FC = () => {
   return (
     <BrowserRouter>

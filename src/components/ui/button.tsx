@@ -1,8 +1,7 @@
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "../../lib/utils"; // 또는 @/lib/utils 경로
+import { cn } from "../../lib/utils";
 
-// Tailwind 스타일 정의
 const buttonVariants = cva(
   "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none",
   {
@@ -19,7 +18,6 @@ const buttonVariants = cva(
   }
 );
 
-// ✅ variant 타입 추가
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {}

@@ -30,7 +30,6 @@ const SinkholeReport = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // ✅ 필수 입력 유효성 검사 강화
     if (
       !selectedLocation ||
       !width.trim() ||
@@ -63,13 +62,13 @@ const SinkholeReport = () => {
       const res = await fetch("https://internetprogramming.onrender.com/api/reports", {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`, // ✅ 토큰
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
         body: formData,
       });
 
       if (res.ok) {
-        alert("✅ 제보가 성공적으로 제출되었습니다!");
+        alert("제보가 성공적으로 제출되었습니다!");
       } else {
         let message = `제보 실패: ${res.status}`;
         try {

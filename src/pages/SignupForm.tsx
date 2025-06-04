@@ -7,7 +7,7 @@ import { PageContainer } from "../components/PageContainer";
 
 const SignupForm = () => {
   const navigate = useNavigate();
-  const [form, setForm] = useState({ username: "", email: "", password: "" });
+  const [form, setForm] = useState({ username: "", email: "", password: "", nickname: ""});
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -75,6 +75,10 @@ const SignupForm = () => {
         <div>
           <Label>비밀번호</Label>
           <Input type="password" name="password" value={form.password} onChange={handleChange} className="text-black"/>
+        </div>
+        <div>
+          <Label>비밀번호</Label>
+          <Input name="nickname" value={form.nickname} onChange={handleChange} className="text-black"/>
         </div>
         <Button type="submit">회원가입</Button>
       </form>

@@ -57,7 +57,6 @@ const MapView: React.FC<Props> = memo(({ onSelectLocation }) => {
     }
 
     return () => {
-      // 클린업 생략
     };
   }, [onSelectLocation]);
 

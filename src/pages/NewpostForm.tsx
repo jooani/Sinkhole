@@ -1,4 +1,3 @@
-// src/pages/NewPostForm.tsx
 import React, { useState } from "react";
 import { PageContainer } from "../components/PageContainer";
 import { Button } from "../components/ui/button";
@@ -47,14 +46,14 @@ const NewPostForm = () => {
       });
 
       if (res.ok) {
-        alert("✅ 게시글이 등록되었습니다!");
+        alert("게시글이 등록되었습니다!");
       } else {
         const err = await res.json();
         alert(`등록 실패: ${err.message || res.status}`);
       }
     } catch (err) {
       console.error(err);
-      alert("❌ 등록 중 오류가 발생했습니다.");
+      alert("등록 중 오류가 발생했습니다.");
     }
   };
 
@@ -64,7 +63,6 @@ const NewPostForm = () => {
         <h2 className="text-2xl font-bold mb-4">게시글 작성</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <Label className="text-gray-400 dark:text-gray-300">카테고리</Label>
             <Select
               onValueChange={(value) =>
                 setForm((prev) => ({ ...prev, category: value }))

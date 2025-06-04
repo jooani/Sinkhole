@@ -1,17 +1,16 @@
 {
   "compilerOptions": {
-    "allowJs": true,        // ✅ JS, JSX 파일도 허용
+    "allowJs": true, 
     "checkJs": false,  
     "target": "es6",
     "module": "esnext",
-    "jsx": "react-jsx", // ← JSX 에러 해결
+    "jsx": "react-jsx",
     "strict": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
 
-    // 👇 여기에 global 타입 포함
     "typeRoots": ["./node_modules/@types", "./src/types"]
   },
   "include": ["src"]

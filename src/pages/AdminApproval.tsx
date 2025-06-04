@@ -37,7 +37,6 @@ const AdminApproval = () => {
           alert("관리자만 접근할 수 있습니다.");
           navigate("/");
         } else {
-          // ADMIN이라면 승인 대기 제보 불러오기
           const reportRes = await fetch(
             "https://internetprogramming.onrender.com/api/reports/pending",
             {
@@ -149,7 +148,6 @@ const AdminApproval = () => {
 
 export default AdminApproval;
 
-// ✅ EXIF 분석 함수
 function checkExifMetadata(
   reports: Report[],
   setExifWarnings: React.Dispatch<React.SetStateAction<ExifWarnings>>
