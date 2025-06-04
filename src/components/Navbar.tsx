@@ -123,7 +123,7 @@ export function Navbar() {
                     {isLoggedIn ? (
                       <button
                         onClick={handleLogout}
-                        className="block p-2 text-left w-full hover:underline"
+                        className="bg-gray-800 text-white shadow-lg rounded-m block p-2 text-left w-full hover:underline"
                       >
                         로그아웃
                       </button>

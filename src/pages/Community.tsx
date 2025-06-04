@@ -13,6 +13,7 @@ type Post = {
 export default function Community() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [keyword, setKeyword] = useState("");
+  const [categoryFilter, setCategoryFilter] = useState<string>("all");
 
   const filteredPosts = posts.filter(
     (p) =>
@@ -59,20 +60,20 @@ export default function Community() {
           <thead className="bg-gray-100">
             <tr>
               <th className="p-3 text-black">제목</th>
-              <th className="p-3 hidden sm:table-cell">작성자</th>
-              <th className="p-3 hidden sm:table-cell">작성일</th>
+              <th className="p-3 text-black">작성자</th>
+              <th className="p-3 text-black">작성일</th>
             </tr>
           </thead>
           <tbody>
             {filteredPosts.map((post) => (
               <tr
                 key={post.id}
-                className="border-t hover:bg-gray-100 dark:hover:bg-gray-700"
+                className="border-t hover:bg-gray-700"
               >
                 <td className="p-3 text-blue-600 font-medium">
                   <Link to={`/community/${post.id}`}>{post.title}</Link>
                 </td>
-                <td className="p-3 text-sm text-gray-900 dark:text-white hidden sm:table-cell">
+                <td className="p-3 text-sm hidden sm:table-cell">
                   {post.author}
                 </td>
                 <td className="p-3 text-sm hidden sm:table-cell">
